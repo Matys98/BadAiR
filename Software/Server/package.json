@@ -1,0 +1,24 @@
+{
+  "name": "server_BadAiR",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michał Matysiak",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
+    "express": "^4.17.1",
+    "from": "^0.1.7",
+    "jquery": "^3.5.1",
+    "moment": "^2.24.0",
+    "mysql": "^2.17.1",
+    "scratch": "0.0.0",
+    "sequelize": "^5.21.2",
+    "sqlite3": "^4.1.0",
+    "ws": "^7.2.0"
+  }
+}
