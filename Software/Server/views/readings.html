@@ -33,8 +33,7 @@
 		navbar-light bg-light - white background nav, dark text
 		sticky-top - sticks to top i guess
 		-->
-        <a class="navbar-brand nav-item" href="index.html"><img src="img/BadAiR_200x200.png" alt="logo"
-            style="width:100px"></a>
+        <a class="navbar-brand nav-item" href="index.html"><img src="img/BadAiR_200x200.png" alt="logo" style="width:90px"></a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<!-- navbar-toggler - toggle switch for navigation
@@ -81,7 +80,7 @@
         <hr>
         <div class="col-12">
             <div class="padding">
-                <div class="d-inline-flex p-2 justify-content-center" style="max-width: 80%; min-width:250px">
+                <div class="d-inline-flex p-2 justify-content-center" style="max-width: 90%; min-width:250px">
                     <div class="card" style="align-content: center;"> 
                         <div style="overflow:hidden; width:inherit; height:6vw">
                         <img class ="card-img-top"  src="img/clear_air.jpg" alt="Card image cap">
@@ -102,7 +101,9 @@
                                 <div class="col-sm m-l-20">
                                     <h1 id="gps_adtitude" style ="font-size:2vw" class="font-light text-info m-b-0">-</h1>
                                     <small >Adtitude</small>
-                                </div>
+                                </div>                                
+                            </div>
+                            <div class="row">
                                 <div class="col-sm m-l-20">
                                     <h1 id="air_temperature" style ="font-size:2vw" class="font-light text-info m-b-0">-</h1>
                                     <small>Air Temperature</small>
@@ -112,32 +113,33 @@
                                     <small >Air Humidity</small>
                                 </div>
                                 <div class="col-sm m-l-20">
-                                    <h1 id="presure" style ="font-size:2vw" class="font-light text-info m-b-0">-</h1>
-                                    <small>Presure</small>
-                                </div>
+                                    <h1 id="pressure" style ="font-size:2vw" class="font-light text-info m-b-0">-</h1>
+                                    <small>Pressure</small>
+                                </div>                                    
+                            </div>   
+
+                            <div class="row">
                                 <div class="col-sm m-l-20">
-                                    <h1 id="mq7" style ="font-size:2vw" class="font-light text-info m-b-0">-</h1>
-                                    <small>MQ 7</small>
-                                </div>
-                                <div class="col-sm m-l-20">
-                                    <h1 id="mq7_max" style ="font-size:2vw" class="font-light text-info m-b-0">-</h1>
-                                    <small>MQ 7 Max</small>
-                                </div>
-                                <div class="col-sm m-l-20">
-                                    <h1 id="pm1_0" style ="font-size:3vw" class="font-light text-info m-b-0">-</h1>
+                                    <h1 id="pm1_0" style ="font-size:2vw">-</h1>
                                     <small>PM 1.0</small>
                                 </div>
                                 <div class="col-sm m-l-20">
-                                    <h1 id="pm2_5" style ="font-size:3vw" class="font-light text-info m-b-0">-</h1>
+                                    <h1 id="pm2_5" style ="font-size:2vw">-</h1>
                                     <small>PM 2.5</small>
                                 </div>
                                 <div class="col-sm m-l-20">
-                                    <h1 id="pm10" style ="font-size:3vw" class="font-light text-info m-b-0">-</h1>
+                                    <h1 id="pm10" style ="font-size:2vw">-</h1>
                                     <small>PM 10</small>
-                                </div>
-                                
+                                </div>   
                             </div>
-                            <div class="row">
+                            <div class="row"></div>
+                                <div class="col-sm m-l-20">
+                                    <h1 id="mq7" style ="font-size:2vw">-</h1>
+                                    <small>CO</small>
+                                </div> 
+                            </div>
+
+                            <!-- <div class="row">
                                 <div class="col-sm m-l-20">
                                     <button id ="fertilise_to_db" style="width:15vw; height:5vw;font-size:2vw" class="btn btn-primary"  onclick="send_command('<Update>')">Update</button>
                                 </div>
@@ -147,15 +149,23 @@
                                 <div class="col-sm m-l-20">
                                     <button id ="clear_db" style="width:15vw; height:5vw;font-size:2vw" class="btn btn-primary"  onclick="send_command('<Clear>')">Clear</button>
                                 </div>
-                            </div>
-                        </div>
+                            </div> -->
                     </div>
                 </div>
             </div>
+        </div>
         <p class="lead">PM Chart (ug/m3)</p>
-        <canvas id="myChart"></canvas>
-        </div> 
-    </div>
+        <canvas id="myChart" style="height:0.2vw"></canvas>
+        <div class="row text-center justify-content-center mx-auto padding ">
+            <a id="download_link" download="readings.txt" href=”” >
+                <i class="fas fa-file-download fa-3x"></i>
+                <div class="col-12 fa-file-download">
+                    <h3>Download readings</h3>
+                </div>
+                <p> </p>
+            </a>
+        </div>
+    </div> 
 </div>
 
 <!--- 4 Column Section - technologies used to do the website, add font awsome? -->
@@ -193,7 +203,7 @@
     <div class="container-fluid padding ">
         <div class="row text-center ">
             <div class="col-md-4">
-                <img src="img/BadAiR_200x200.png" alt="logo" style="width:100px">
+                <a class="nav-link" href="index.html"><img src="img/BadAiR_200x200.png" alt="logo" style="width:90px; height:75px"></a>
                 <hr class="light">
                 <p>BadAir - Michał Matysiak</p>
                 <p>44-100 Gliwice</p>
@@ -202,7 +212,7 @@
             </div>
 
             <div class="col-md-4">
-                <img src="img/polsl_logo.png" alt="logo" style="width:75px">
+                <a href="https://www.polsl.pl/Strony/Witamy.aspx" target="_blank"><img src="img/polsl_logo.png" alt="logo" style="width:75px"></a>
                 <hr class="light">
                 <p>Politechnika Śląska</p>
                 <p>44-100 Gliwice</p>

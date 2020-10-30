@@ -224,3 +224,4 @@ wsServer.on("connection", function(ws, req) {
 app.listen(3000, "localhost", function() {
   console.log("Application worker " + process.pid + " started...");
 });
+server.listen(3000);

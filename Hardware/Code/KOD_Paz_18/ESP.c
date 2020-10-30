@@ -37,13 +37,6 @@ String receivedFromUno;
 String serialMessage = "";
 bool stringComplete = false;
 
-// --- LoRa --- //            
-#include <SPI.h>
-#include <LoRa.h>
-
-const int  rxLoRapin = 3;
-const int txLoRapin = 2;
-
 SoftwareSerial serial_LoRa(rxLoRapin, txLoRapin);
 
 //Method to connect to the websocket server
@@ -116,16 +109,6 @@ void setup()
     pinMode(txESPpin,OUTPUT);
     NodeMCU.begin(9600);
 
-    // --- LoRa config --- //
-    Serial_LoRa.begin(9600);
-    while (!Serial_LoRa);
-
-    Serial_LoRa.println("LoRa Receiver");
-
-    if (!LoRa.begin(915E6)) {
-        Serial_LoRa.println("Starting LoRa failed!");
-        while (1);
-    }
 }
 
 
@@ -144,68 +127,42 @@ void loop()
         dataToSend = "";
         //webSocketClient.sendData("data was send to arduino");
     }
-       
+    String LoRa_mesage;
 
     //When there is something in serial buffer
     while (NodeMCU.available()) {
-        //Serial.println("NodeMCU available !@");
-        //char serialChar = NodeMCU.read();  //gets one byte from serial buffer
-        char serialChar = receive_data();
+        char LoRaChar = NodeMCU.read();
         
-        if (serialChar == '<'){ //if < is the beginning of the received char reset the buffer
-            serialMessage = "";
-            serialMessage += serialChar;
+        if (LoRaChar == '<'){ //if < is the beginning of the received char reset the buffer
+            LoRa_mesage = "";
+            LoRa_mesage += LoRaChar;
         }
 
-        else if (serialChar == '>'){
+        else if (LoRaChar == '>'){
             stringComplete = true;
-            serialMessage += serialChar;
+            LoRa_mesage += LoRaChar;
         }
                         
         else{
             //Append the message within specified ascii section 
-            if ((serialChar >= 48 && serialChar <= 122) || serialChar == ',') 
-                serialMessage += serialChar;
+            if ((LoRaChar >= 48 && LoRaChar <= 122) || LoRaChar == ',') 
+                LoRa_mesage += LoRaChar;
         }               
     }
     
-    webSocketClient.sendData("<lat:"+String(random(0,5000))+";lon:"+String(random(0,5000))+";adt:"+String(random(0,100))+";tem:"+String(random(0,34))+";hum:"+String(random(0,100))+";pre:"+String(random(1000,1040))+";mq:"+String(random(0,500))+";mq_max:"+String(random(0,600))+";pm1_0:"+String(random(0,50))+";pm2_5:"+String(random(0,75))+";pm10:"+String(random(0,100))+";>");
+    //webSocketClient.sendData();
 
     if(stringComplete == true){
-        Serial.println("Received from arduino: " );  
+        Serial.println("Received from LoRa: " );  
         delay(2); 
         stringComplete = false;
-        Serial.println(serialMessage);
+        Serial.println(LoRa_mesage);
                           
-        webSocketClient.sendData(serialMessage); //send received data to websocket server
-        serialMessage = "";
+        webSocketClient.sendData(LoRa_mesage); //send received data to websocket server
+        LoRa_mesage = "";
     }
        
     //delay(100);
     
 }
 
-/*
-
-char* receive_data(){
-    
-    char LoRa_mesage;
-    int packetSize = LoRa.parsePacket();
-    if (packetSize) {
-        char mesage[packetSize + 10];
-        // received a packet
-        Serial_LoRa.print("Received packet ");
-        // read packet
-        while (LoRa.available()) {
-            mesage = (char)LoRa.read();
-            Serial_LoRa.print(mesage);
-        }
-        // print RSSI of packet
-        Serial_LoRa.print("' with RSSI ");
-        Serial_LoRa.println(LoRa.packetRssi());
-        LoRa_mesage = mesage;
-    }
-return LoRa_mesage;
-}
-
-*/

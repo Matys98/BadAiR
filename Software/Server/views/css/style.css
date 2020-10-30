@@ -82,9 +82,24 @@ body {
 .fa-tint {
  color: #1664bd;
 }
+.fa-file-download{
+    color: gray;
+}
 
-.fa-lightbulb {
- color: yellow;
+.fa-temperature-low{
+    color: rgba(235, 235, 20, 0.89);
+}
+
+.fa-check-square{
+    color: green;
+}
+
+.fa-map-marker-alt{
+    color: red;
+}
+
+.fa-tint{
+    color: blue;
 }
 
 .fa-html5,
@@ -92,7 +107,6 @@ body {
 .fa-css3,
 .fa-node-js,
 .fa-font-awesome,
-.fa-tint,
 .fa-medrt,
 .fa-lightbulb,
 .fa-glass-whiskey {
