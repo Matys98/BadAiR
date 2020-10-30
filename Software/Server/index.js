@@ -207,6 +207,7 @@ wsServer.on("connection", function(ws, req) {
         client.send("broadcast: " + message);
       }
     });
+    // heroku test
 
     //console.log(message); ify
 
