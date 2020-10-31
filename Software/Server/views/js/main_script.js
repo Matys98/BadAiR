@@ -137,10 +137,22 @@ function $(id, val) {
 }
 function makeCsvFile(data, count){
   var csvHeader = 'ID,DATE,LATITUDE,LONGITUDE,ADTITUDE,TEMPERATURE,HUMIDITY,PRESSURE,MQ7,MQ7 DETECT,PM 1.0,PM 2.5,PM 10';
-  let csvData = [];
+  var csvData = '';
   for (i = 0; i < count; i++) {
-    csvData[i] = data[i].ID + ',' + data[i].Date + ',' + data[i].GPS_Latitude + ',' + data[i].GPS_Longitude + ',' + data[i].GPS_Adtitude + ',' + data[i].Air_Temperature + ',' + data[i].Air_Humidity + ',' + data[i].Presure + ',' + data[i].MQ7 + ',' + data[i].MQ7_max + ',' + data[i].PM1_0 + ',' + data[i].PM2_5 + ',' + data[i].PM10;
-    csvData[i] += '\n';
+    csvData += data[i].ID + ',' ;
+    csvData += data[i].Date + ',';
+    csvData += data[i].GPS_Latitude + ',';
+    csvData += data[i].GPS_Longitude + ',';
+    csvData += data[i].GPS_Adtitude + ',';
+    csvData += data[i].Air_Temperature + ','; 
+    csvData += data[i].Air_Humidity + ',';
+    csvData += data[i].Presure + ',';
+    csvData += data[i].MQ7 + ',';
+    csvData += data[i].MQ7_max + ',';
+    csvData += data[i].PM1_0 + ',';
+    csvData += data[i].PM2_5 + ',';
+    csvData += data[i].PM10;
+    csvData += "\n";
   }
 
   var text = csvHeader + '\n' + csvData;

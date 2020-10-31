@@ -3,7 +3,8 @@ var path = require("path");
 var http = require("http");
 var app = express();
 var Sequelize = require("sequelize");
-var port = 3000;
+var hostname = 'localhost';
+var port = process.env.PORT || 3000;
 var bodyParser = require("body-parser");
 
 var moment = require("moment");
@@ -141,6 +142,7 @@ app.post("/control", (req, res) => {
 //app.use('/views/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 require("dns").lookup(require("os").hostname(), function(err, localhost, fam) {
   console.log("addr: " + localhost);
+  console.log("port: " + port);
 });
 
 wsServer.on("connection", function(ws, req) {
@@ -207,8 +209,6 @@ wsServer.on("connection", function(ws, req) {
         client.send("broadcast: " + message);
       }
     });
-    // heroku test
-
     //console.log(message); ify
 
     // ws.send("From Server only to sender: "+ message); //send to client where message is from
@@ -221,8 +221,7 @@ wsServer.on("connection", function(ws, req) {
 });
 
 //Listening on port
-//opening on phone/laptop - 192.168.1.61:3000 - device ipv4 address
-app.listen(3000, "localhost", function() {
+app.listen(port, hostname, function() {
   console.log("Application worker " + process.pid + " started...");
 });
-server.listen(3000);
+server.listen(port);
