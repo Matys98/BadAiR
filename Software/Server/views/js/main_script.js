@@ -29,59 +29,45 @@ async function get_from_database() {
 
     response = await response.json();
     console.log("Got response!", response);
-    $("#gps_latitude").text(response[0].GPS_Latitude);
-    $("#gps_longitude").text(response[0].GPS_Longitude);
-    $("#gps_adtitude").text(response[0].GPS_Adtitude + " m");
-    $("#air_temperature").text(response[0].Air_Temperature + " °C");
-    $("#air_humidity").text(response[0].Air_Humidity + " %");
-    $("#pressure").text(response[0].Presure + " hPa");
+    $("#gps_latitude").text(response[0].GPS_Latitude/1000000);
+    $("#gps_longitude").text(response[0].GPS_Longitude/1000000);
+    $("#gps_adtitude").text(response[0].GPS_Adtitude/100 + " m");
+    $("#air_temperature").text(response[0].Air_Temperature/10 + " °C");
+    $("#air_humidity").text(response[0].Air_Humidity/10 + " %");
+    $("#pressure").text(response[0].Presure/100 + " hPa");  
     $("#mq7").text(response[0].MQ7+ " ppm");
     $("#mq7_max").text(response[0].MQ7_max);
     $("#pm1_0").text(response[0].PM1_0 + " ug/m3");
     $("#pm2_5").text(response[0].PM2_5 + " ug/m3");
     $("#pm10").text(response[0].PM10 + " ug/m3");
 
-    if(response[0].PM1_0 < 200){
+    if(response[0].PM1_0 < 200)
       $("#pm1_0").css("color", "green");
-    }
-    else if(response[0].PM1_0 >= 200 && response[0].PM1_0 <= 400){
+    else if(response[0].PM1_0 >= 200 && response[0].PM1_0 <= 400)
       $("#pm1_0").css("color", "rgba(235, 235, 20, 0.89)");
-    }
-    else{
+    else
       $("#pm1_0").css("color", "red");
-    }
 
-    if(response[0].PM2_5 < 200){
+    if(response[0].PM2_5 < 200)
       $("#pm2_5").css("color", "green");
-    }
-    else if(response[0].PM2_5 >= 200 && response[0].PM2_5 <= 400){
+    else if(response[0].PM2_5 >= 200 && response[0].PM2_5 <= 400)
       $("#pm2_5").css("color", "rgba(235, 235, 20, 0.89)");
-    }
-    else{
+    else
       $("#pm2_5").css("color", "red");
-    }
 
-    if(response[0].PM10 < 200){
+    if(response[0].PM10 < 200)
       $("#pm10").css("color", "green");
-    }
-    else if(response[0].PM10 >= 200 && response[0].PM10 <= 400){
+    else if(response[0].PM10 >= 200 && response[0].PM10 <= 400)
       $("#pm10").css("color", "rgba(235, 235, 20, 0.89)");
-    }
-    else{
+    else
       $("#pm10").css("color", "red");
-    }
 
-    if(response[0].MQ7 < 200){
+    if(response[0].MQ7 < 200)
       $("#mq7").css("color", "green");
-    }
-    else if(response[0].MQ7 >= 200 && response[0].MQ7 <= 400){
+    else if(response[0].MQ7 >= 200 && response[0].MQ7 <= 400)
       $("#mq7").css("color", "rgba(235, 235, 20, 0.89)");
-    }
-    else{
+    else
       $("#mq7").css("color", "red");
-    }
-
-
 
     makeChart(response[1], response[2]); // response 1 is data for chart, response 2 is amount of data
     makeCsvFile(response[1], response[2]);
@@ -135,34 +121,9 @@ function $(id, val) {
   }
   document.getElementById(id).innerHTML = val;
 }
-function makeCsvFile(data, count){
-  var csvHeader = 'ID,DATE,LATITUDE,LONGITUDE,ADTITUDE,TEMPERATURE,HUMIDITY,PRESSURE,MQ7,MQ7 DETECT,PM 1.0,PM 2.5,PM 10';
-  var csvData = '';
-  for (i = 0; i < count; i++) {
-    csvData += data[i].ID + ',' ;
-    csvData += data[i].Date + ',';
-    csvData += data[i].GPS_Latitude + ',';
-    csvData += data[i].GPS_Longitude + ',';
-    csvData += data[i].GPS_Adtitude + ',';
-    csvData += data[i].Air_Temperature + ','; 
-    csvData += data[i].Air_Humidity + ',';
-    csvData += data[i].Presure + ',';
-    csvData += data[i].MQ7 + ',';
-    csvData += data[i].MQ7_max + ',';
-    csvData += data[i].PM1_0 + ',';
-    csvData += data[i].PM2_5 + ',';
-    csvData += data[i].PM10;
-    csvData += "\n";
-  }
-
-  var text = csvHeader + '\n' + csvData;
-  var data = new Blob([text], {type: 'text/plain'});
-  var url = window.URL.createObjectURL(data);
-  document.getElementById('download_link').href = url;
-}
 
 function makeChart(chartData, count) {
-  var ctx = document.getElementById("myChart").getContext("2d");
+  var ctx = document.getElementById("chartBox").getContext("2d");
   var i;
   let dataset1 = [];
   let dataset2 = [];
@@ -215,14 +176,13 @@ function makeChart(chartData, count) {
         xAxes: [
           {
             display: true,
+            type: "time",
             time: {
               unit: "day",
               displayFormats: {
-                day: "DD.MM.YYYY HH:mm"
+                day: "DD.MM.YYYY HH:mm:ss"
               }
             },
-
-            type: "time",
 
             distribution: "series"
           }
@@ -249,6 +209,32 @@ function makeChart(chartData, count) {
       responsiveAnimationDuration: 0 // animation duration after a resize
     }
   });
+}
+
+function makeCsvFile(data, count){
+  var csvHeader = 'ID, DATE, LATITUDE, LONGITUDE, ADTITUDE [m], TEMPERATURE [*C], HUMIDITY [%], PRESSURE [hPa], MQ7 [ppm], MQ7 DETECT, PM 1.0 [ug/m^3], PM 2.5 [ug/m^3], PM 10 [ug/m^3]';
+  var csvData = '';
+  for (i = 0; i < count; i++) {
+    csvData += data[i].ID + ',' ;
+    csvData += data[i].Date + ',';
+    csvData += data[i].GPS_Latitude/1000000 + ',';
+    csvData += data[i].GPS_Longitude/1000000 + ',';
+    csvData += data[i].GPS_Adtitude/100 + ',';
+    csvData += data[i].Air_Temperature/10 + ','; 
+    csvData += data[i].Air_Humidity/10 + ',';
+    csvData += data[i].Presure/100 + ',';
+    csvData += data[i].MQ7 + ',';
+    csvData += data[i].MQ7_max + ',';
+    csvData += data[i].PM1_0 + ',';
+    csvData += data[i].PM2_5 + ',';
+    csvData += data[i].PM10;
+    csvData += "\n";
+  }
+
+  var text = csvHeader + '\n' + csvData;
+  var data = new Blob([text], {type: 'text/plain'});
+  var url = window.URL.createObjectURL(data);
+  document.getElementById('download_link').href = url;
 }
 
 window.onload = init;

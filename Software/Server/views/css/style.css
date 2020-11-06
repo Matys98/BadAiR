@@ -8,6 +8,7 @@ body {
  width: 100%;
  font-family: "Poppins", sans-serif;
  color: #1d1c1c;
+ background-color: whitesmoke;
 }
 
 /* padding fix */
@@ -88,6 +89,8 @@ body {
 .fa-bootstrap {
  color: #563d7c;
 }
+
+.fa-hands-helping,
 
 .fa-css3,
 .fa-glass-whiskey {
