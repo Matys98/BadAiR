@@ -71,7 +71,6 @@ void loop(){
     pms_7003();
     if((millis() % 150) >= 149 && (millis() % 150) <= 1)
       gps_position();
-//    if((i_pms[0] != pms_old[0] || i_pms[1] != pms_old[1] || i_pms[2] != pms_old[2]) || (d_gps[0] != gps_old[0] || d_gps[1] != gps_old[1] || d_gps[2] != gps_old[2]) ){   
     if((millis() % 800) >= 799 && (millis() % 800) <= 1){    
         mq_7();
         temperature_humidity();
