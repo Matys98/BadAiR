@@ -58,7 +58,7 @@
                     <a class="nav-link" href="about.html">About</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="product.html">Product</a>
+                    <a class="nav-link" href="product.html">Gallery</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="readings.html">Readings</a>
@@ -81,7 +81,7 @@
 <div class="container-fluid padding">
     <div class="row welcome text-center">
         <div class="col-12">
-            <h1 class="display-4">Product specification</h1>
+            <h1 class="display-4">Product gallery</h1>
             <!-- Main title -->
         </div>
         <hr>
@@ -91,6 +91,111 @@
 
 <!--- 4 Column Section - technologies used to do the website, add font awsome? -->
 <div class="container-fluid padding">
+
+<!-- Slideshow container -->
+<div class="slideshow-container">
+
+    <!-- Full-width images with number and caption text -->
+    <div class="mySlides fade">
+      <div class="numbertext">1 / 13</div>
+      <img src="imageGallery/img1.png" style="width:100%">
+      <div class="text">Caption Text</div>
+    </div>
+  
+    <div class="mySlides fade">
+      <div class="numbertext">2 / 13</div>
+      <img src="imageGallery/img2.png" style="width:100%">
+      <div class="text">Caption Two</div>
+    </div>
+  
+    <div class="mySlides fade">
+      <div class="numbertext">3 / 13</div>
+      <img src="imageGallery/img3.png" style="width:100%">
+      <div class="text">Caption Three</div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">4 / 13</div>
+        <img src="imageGallery/img4.png" style="width:100%">
+        <div class="text">Caption Three</div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">5 / 13</div>
+        <img src="imageGallery/img5.JPG" style="width:100%">
+        <div class="text">Caption Text</div>
+      </div>
+    
+      <div class="mySlides fade">
+        <div class="numbertext">6 / 13</div>
+        <img src="imageGallery/img6.jpg" style="width:100%">
+        <div class="text">Caption Two</div>
+      </div>
+    
+      <div class="mySlides fade">
+        <div class="numbertext">7 / 13</div>
+        <img src="imageGallery/img7.png" style="width:100%">
+        <div class="text">Caption Three</div>
+      </div>
+  
+      <div class="mySlides fade">
+          <div class="numbertext">8 / 13</div>
+          <img src="imageGallery/img8.png" style="width:100%">
+          <div class="text">Caption Three</div>
+      </div>
+    
+      <div class="mySlides fade">
+        <div class="numbertext">9 / 13</div>
+        <img src="imageGallery/img9.png" style="width:100%">
+        <div class="text">Caption Text</div>
+      </div>
+    
+      <div class="mySlides fade">
+        <div class="numbertext">10 / 13</div>
+        <img src="imageGallery/img10.png" style="width:100%">
+        <div class="text">Caption Two</div>
+      </div>
+    
+      <div class="mySlides fade">
+        <div class="numbertext">11 / 13</div>
+        <img src="imageGallery/img11.png" style="width:100%">
+        <div class="text">Caption Three</div>
+      </div>
+  
+    <div class="mySlides fade">
+        <div class="numbertext">12 / 13</div>
+        <img src="imageGallery/img12.png" style="width:100%">
+        <div class="text">Caption Three</div>
+      </div>
+      
+    <div class="mySlides fade">
+        <div class="numbertext">13 / 13</div>
+        <img src="imageGallery/img13.png" style="width:100%">
+        <div class="text">Caption Three</div>
+    </div>
+
+    <!-- Next and previous buttons -->
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
+  <br>
+  
+  <!-- The dots/circles -->
+  <div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+    <span class="dot" onclick="currentSlide(6)"></span>
+    <span class="dot" onclick="currentSlide(7)"></span>
+    <span class="dot" onclick="currentSlide(8)"></span>
+    <span class="dot" onclick="currentSlide(9)"></span>
+    <span class="dot" onclick="currentSlide(10)"></span>
+    <span class="dot" onclick="currentSlide(11)"></span>
+    <span class="dot" onclick="currentSlide(12)"></span>
+    <span class="dot" onclick="currentSlide(13)"></span>
+  </div>
 
 </div>
 <hr class="my-4">
@@ -157,6 +262,38 @@
     </div>
 </footer>
 
+<script>
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+
+</script>
 
 
 
