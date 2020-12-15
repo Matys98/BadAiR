@@ -14,11 +14,7 @@ String dataToSend = "";
 
 char path[] = "/"; //identifier of this device
 
-/*
-const char *ssid = "Internet";
-const char *password = "dlink123";
-char *host = "192.168.1.61"; 
-*/
+
 const char *ssid = "Badairr";
 const char *password = "0123456789";
 char *host = "192.168.43.38"; 
