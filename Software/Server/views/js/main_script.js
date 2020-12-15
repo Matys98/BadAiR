@@ -32,8 +32,8 @@ async function get_from_database() {
     $("#gps_latitude").text(response[0].GPS_Latitude/1000000);
     $("#gps_longitude").text(response[0].GPS_Longitude/1000000);
     $("#gps_adtitude").text(response[0].GPS_Adtitude/100 + " m");
-    $("#air_temperature").text(response[0].Air_Temperature/10 + " °C");
-    $("#air_humidity").text(response[0].Air_Humidity/10 + " %");
+    $("#air_temperature").text(response[0].Air_Temperature + " °C");
+    $("#air_humidity").text(response[0].Air_Humidity + " %");
     $("#pressure").text(response[0].Presure/100 + " hPa");  
     $("#mq7").text(response[0].MQ7+ " ppm");
     $("#mq7_max").text(response[0].MQ7_max);
@@ -222,8 +222,8 @@ function makeCsvFile(data, count){
     csvData += data[i].GPS_Latitude/1000000 + ' ,';
     csvData += data[i].GPS_Longitude/1000000 + ' ,';
     csvData += data[i].GPS_Adtitude/100 + ' ,';
-    csvData += data[i].Air_Temperature/10 + ' ,'; 
-    csvData += data[i].Air_Humidity/10 + ' ,';
+    csvData += data[i].Air_Temperature + ' ,'; 
+    csvData += data[i].Air_Humidity + ' ,';
     csvData += data[i].Presure/100 + ' ,';
     csvData += data[i].MQ7 + ' ,';
     csvData += data[i].MQ7_max + ' ,';

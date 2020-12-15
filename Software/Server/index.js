@@ -4,7 +4,7 @@ var http = require("http");
 var app = express();
 var Sequelize = require("sequelize");
 var hostname = 'localhost';
-var port = process.env.PORT || 3000;
+var port = 3000 || process.env.PORT;
 var bodyParser = require("body-parser");
 
 var moment = require("moment");
@@ -112,6 +112,7 @@ app.get("/readings", async function(req, resp) {
       raw: true,
       order: [["ID", "DESC"]]
     });
+
     let datachart = await Drone_readings.findAll({
       raw: true,
       order: [["ID"]]
@@ -138,8 +139,6 @@ app.post("/control", (req, res) => {
   res.send("1");
 });
 
-//bootstrap usage?
-//app.use('/views/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 require("dns").lookup(require("os").hostname(), function(err, localhost, fam) {
   console.log("addr: " + localhost);
   console.log("port: " + port);
@@ -209,7 +208,7 @@ wsServer.on("connection", function(ws, req) {
         client.send("broadcast: " + message);
       }
     });
-    //console.log(message); ify
+    //console.log(message);
 
     // ws.send("From Server only to sender: "+ message); //send to client where message is from
   });
