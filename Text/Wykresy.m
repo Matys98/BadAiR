@@ -1,9 +1,10 @@
 clc; clear all; close all;
 
-P1Start=346; P1End=567; 
+P1Start=763; P1End=1088; 
 C1= 2; C2= 12;
+step = 15;
 
-data = '6 Pazdziernika';
+data = '16 Grudnia 2020';
 
 filename = 'readings.csv';
 readDataCSV = csvread(filename,P1Start,C1,[P1Start C1 P1End C2]);
@@ -11,8 +12,9 @@ readTableCSV = readtable(filename);
 readTableCSV = readTableCSV(:,6);
 
 time = table2array(readTableCSV);
-time = string(time(P1Start:P1End));
+time = string(time(P1Start:step:P1End));
 time = time.';
+xTime = P1Start:P1End;
 
 %% Oczyt danych
 latd = readDataCSV(:,1);
@@ -28,49 +30,49 @@ pm2_5 = readDataCSV(:,10);
 pm10 = readDataCSV(:,11);
 
 %% Wykresy
-figure
-plot(adti)
-set(gca,'xticklabel',time)
+figure 
+plot(xTime, adti)
+set(gca, 'XTick', P1Start:step:P1End, 'XTickLabel', time);
 title('Wysokosc'); ylabel('m'); xlabel(data);
 
 figure
-plot(tem)
-set(gca,'xticklabel',time)
+plot(xTime, tem)
+set(gca, 'XTick', P1Start:step:P1End, 'XTickLabel', time);
 title('Temperatura'); ylabel('*C'); xlabel(data);
 
 figure
-plot(hum)
-set(gca,'xticklabel',time)
+plot(xTime, hum)
+set(gca, 'XTick', P1Start:step:P1End, 'XTickLabel', time);
 title('Wilgotnosc'); ylabel('%'); xlabel(data);
 
 figure
-plot(press)
-set(gca,'xticklabel',time)
+plot(xTime, press)
+set(gca, 'XTick', P1Start:step:P1End, 'XTickLabel', time);
 title('Cisnienie'); ylabel('hPa'); xlabel(data);
 
 figure
-plot(mq7)
-set(gca,'xticklabel',time)
+plot(xTime ,mq7)
+set(gca, 'XTick', P1Start:step:P1End, 'XTickLabel', time);
 title('MQ7 - CO'); ylabel('ppm'); xlabel(data);
 
 figure
-plot(mq7D)
-set(gca,'xticklabel',time)
+plot(xTime, mq7D)
+set(gca, 'XTick', P1Start:step:P1End, 'XTickLabel', time);
 title('mq7D')
 
 figure
-plot(pm1_0)
-set(gca,'xticklabel',time)
+plot(xTime, pm1_0)
+set(gca, 'XTick', P1Start:15:P1End, 'XTickLabel', time);
 title('pm1.0'); ylabel('ug/m^3'); xlabel(data);
 
 figure
-plot(pm2_5);
-set(gca,'xticklabel',time);
+plot(xTime, pm2_5);
+set(gca, 'XTick', P1Start:step:P1End, 'XTickLabel', time);
 title('pm2.5'); ylabel('ug/m^3'); xlabel(data);
 
 figure
-plot(pm10);
-set(gca,'xticklabel',time);
+plot(xTime, pm10);
+set(gca, 'XTick', P1Start:step:P1End, 'XTickLabel', time);
 title('pm10'); ylabel('ug/m^3'); xlabel(data);
 
 %% Mapa
