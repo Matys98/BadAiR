@@ -82,6 +82,10 @@ Drone_readings.init(
       type: Sequelize.INTEGER,
       allowNull: false
     },
+    BMP_Temp: {
+      type: Sequelize.INTEGER,
+      allowNull: false
+    },
     Date: {
       type: Sequelize.INTEGER,
       allowNull: false
@@ -157,7 +161,7 @@ wsServer.on("connection", function(ws, req) {
     var colonPosition, semicolonPosition, temp, temp2;
     var newMessage = message;
 
-    for (i = 0; i < 11; i++) { //newMessage.count(";")
+    for (i = 0; i < 12; i++) { //newMessage.count(";")
       colonPosition = newMessage.indexOf(":");
       semicolonPosition = newMessage.indexOf(";");
       temp = newMessage.substring(colonPosition + 1, semicolonPosition);
@@ -189,6 +193,7 @@ wsServer.on("connection", function(ws, req) {
         PM1_0: readingsArray[8],
         PM2_5: readingsArray[9],
         PM10: readingsArray[10],
+        BMP_Temp: readingsArray[11],
         Date: new Date()
       })
         .save()

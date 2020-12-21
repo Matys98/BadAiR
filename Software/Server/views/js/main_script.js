@@ -40,6 +40,7 @@ async function get_from_database() {
     $("#pm1_0").text(response[0].PM1_0 + " ug/m3");
     $("#pm2_5").text(response[0].PM2_5 + " ug/m3");
     $("#pm10").text(response[0].PM10 + " ug/m3");
+    $("#BMP_Temp").text(response[0].Air_Temperature + " °C");
 
     if(response[0].PM1_0 < 51)
       $("#pm1_0").css("color", "green");
@@ -84,6 +85,7 @@ async function get_from_database() {
     $("#pm1_0").text("err");
     $("#pm2_5").text("err");
     $("#pm10").text("err");
+    $("#BMP_Temp").text("err");
   }
 }
 // Clock
@@ -214,7 +216,7 @@ function makeChart(chartData, count) {
 }
 
 function makeCsvFile(data, count){
-  var csvHeader = 'ID, DATE, LATITUDE, LONGITUDE, ADTITUDE [m], TEMPERATURE [*C], HUMIDITY [%], PRESSURE [hPa], MQ7 [ppm], MQ7 DETECT, PM 1.0 [ug/m^3], PM 2.5 [ug/m^3], PM 10 [ug/m^3]';
+  var csvHeader = 'ID, DATE, LATITUDE, LONGITUDE, ADTITUDE [m], TEMPERATURE [*C], HUMIDITY [%], PRESSURE [hPa], MQ7 [ppm], MQ7 DETECT, PM 1.0 [ug/m^3], PM 2.5 [ug/m^3], PM 10 [ug/m^3], BMP_Temp [*C]';
   var csvData = '';
   for (i = 0; i < count; i++) {
     csvData += data[i].ID + ' ,' ;
@@ -222,7 +224,7 @@ function makeCsvFile(data, count){
     csvData += data[i].GPS_Latitude/1000000 + ' ,';
     csvData += data[i].GPS_Longitude/1000000 + ' ,';
     csvData += data[i].GPS_Adtitude/100 + ' ,';
-    csvData += data[i].Air_Temperature + ' ,'; 
+    csvData += data[i].Air_Temperature/100 + ' ,'; 
     csvData += data[i].Air_Humidity + ' ,';
     csvData += data[i].Presure/100 + ' ,';
     csvData += data[i].MQ7 + ' ,';
@@ -230,6 +232,7 @@ function makeCsvFile(data, count){
     csvData += data[i].PM1_0 + ' ,';
     csvData += data[i].PM2_5 + ' ,';
     csvData += data[i].PM10;
+    csvData += data[i].BMP_Temp/100 + ' ,';
     csvData += "\n";
   }
 
