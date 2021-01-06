@@ -137,12 +137,16 @@ return mq;
 // --- DTH 22 --- //
 double * temperature_humidity(){
      // 0 = temperature, 1 = humidity
+     double tem_hum[2] = {0.0};
 
 //    int check = dht.getMinimumSamplingPeriod();
-    d_tem_hum[0] = (double)dht.getTemperature();
-    d_tem_hum[1] = (double)dht.getHumidity();
+    tem_hum[0] = (double)dht.getTemperature();
+    tem_hum[1] = (double)dht.getHumidity();
     
-//    Serial.println(String(tem_hum[0])+ "*C " + String(tem_hum[1]) + "%");
+    Serial.println(String(tem_hum[0])+ "*C " + String(tem_hum[1]) + "%");
+
+    d_tem_hum[0] = tem_hum[0];
+    d_tem_hum[1] = tem_hum[1];
 
 return tem_hum;
 }
@@ -176,7 +180,7 @@ double * air_pressure(double ALTITUDE){
     pressure[1] = pre * 0.014503774; //Bar
 
     d_air_press[0] = pre;
-    d_air_press[1] = pressure[0];
+    d_air_press[1] = tem;
 
 //    Serial.println(String(tem)+ "*C "  + String(pressure[0])+ "hPa " + String(pre0)+ "hPa " + String(alt_bar));
 
@@ -192,7 +196,7 @@ void sendDataToESP(){
     message += ("lng:" + String(long(d_gps[1]*1000000)) + ";");
     message += ("adt:" + String(int(d_gps[2]*100)) + ";");
 
-    message += ("tem:" + String(int(d_tem_hum[0])) + ";");
+    message += ("tem:" + String((d_tem_hum[0])*100) + ";");
     message += ("hum:" + String(int(d_tem_hum[1])) + ";");
     message += ("pre:" + String(long(d_air_press[0]*100)) + ";"); //*100
     
@@ -202,6 +206,8 @@ void sendDataToESP(){
     message += ("pm1_0:" + String(i_pms[0]) + ";");
     message += ("pm2_5:" + String(i_pms[1]) + ";");
     message += ("pm10:" + String(i_pms[2]) + ";");
+    
+    message += ("bmpTem:" + String(long(d_air_press[1]*100)) + ";");
     message += ">";
 
     Serial.println(message);

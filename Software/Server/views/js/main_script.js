@@ -32,7 +32,7 @@ async function get_from_database() {
     $("#gps_latitude").text(response[0].GPS_Latitude/1000000);
     $("#gps_longitude").text(response[0].GPS_Longitude/1000000);
     $("#gps_adtitude").text(response[0].GPS_Adtitude/100 + " m");
-    $("#air_temperature").text(response[0].Air_Temperature + " °C");
+    $("#air_temperature").text(response[0].Air_Temperature/100 + " °C");
     $("#air_humidity").text(response[0].Air_Humidity + " %");
     $("#pressure").text(response[0].Presure/100 + " hPa");  
     $("#mq7").text(response[0].MQ7+ " ppm");
@@ -40,7 +40,7 @@ async function get_from_database() {
     $("#pm1_0").text(response[0].PM1_0 + " ug/m3");
     $("#pm2_5").text(response[0].PM2_5 + " ug/m3");
     $("#pm10").text(response[0].PM10 + " ug/m3");
-    $("#BMP_Temp").text(response[0].Air_Temperature + " °C");
+    $("#BMP_Temp").text(response[0].BMP_Temp + " °C");
 
     if(response[0].PM1_0 < 51)
       $("#pm1_0").css("color", "green");
@@ -231,8 +231,8 @@ function makeCsvFile(data, count){
     csvData += data[i].MQ7_max + ' ,';
     csvData += data[i].PM1_0 + ' ,';
     csvData += data[i].PM2_5 + ' ,';
-    csvData += data[i].PM10;
-    csvData += data[i].BMP_Temp/100 + ' ,';
+    csvData += data[i].PM10 + ' ,';
+    csvData += data[i].BMP_Temp/100;
     csvData += "\n";
   }
 
